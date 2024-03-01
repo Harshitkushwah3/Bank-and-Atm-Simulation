@@ -7,11 +7,13 @@ import java.util.Date;
 
 public class Deposit extends JFrame implements ActionListener {
     String pin;
+    String cardnum;
     TextField textField;
 
     JButton b1;
     JButton b2;
-    Deposit(String pin){
+    Deposit(String cardnum,String pin){
+        this.cardnum=cardnum;
         this.pin = pin;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
@@ -21,7 +23,7 @@ public class Deposit extends JFrame implements ActionListener {
         l3.setBounds(0,0,1550,830);
         add(l3);
 
-        JLabel label1 = new JLabel("ENETR AMOUNT YOU WANT TO DEPOSIT");
+        JLabel label1 = new JLabel("ENTER AMOUNT YOU WANT TO DEPOSIT");
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("System", Font.BOLD, 16));
         label1.setBounds(460,180,400,35);
@@ -68,14 +70,14 @@ public class Deposit extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null,"Please enter the Amount you want to Deposit");
                 }else {
                     Connn c = new Connn();
-                    c.statement.executeUpdate("insert into bank values('"+pin+"', '"+date+"','Deposit', '"+amount+"')");
+                    c.statement.executeUpdate("insert into bank values('"+cardnum+"','"+pin+"', '"+date+"','Deposit', '"+amount+"')");
                     JOptionPane.showMessageDialog(null,"Rs. "+amount+" Deposited Successfully");
                     setVisible(false);
-                    new main_Class(pin);
+                    new main_Class(cardnum,pin);
                 }
             }else if (e.getSource()==b2){
                 setVisible(false);
-                new main_Class(pin);
+                new main_Class(cardnum,pin);
             }
         }catch (Exception E){
             E.printStackTrace();
@@ -84,6 +86,6 @@ public class Deposit extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Deposit("");
+        new Deposit("","");
     }
 }

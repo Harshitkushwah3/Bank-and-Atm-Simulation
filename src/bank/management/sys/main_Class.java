@@ -14,7 +14,9 @@ public class main_Class extends JFrame implements ActionListener {
     JButton b6;
     JButton b7;
     String pin;
-    main_Class(String pin){
+    String cardnum;
+    main_Class(String cardnum,String pin){
+        this.cardnum=cardnum;
         this.pin = pin;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
@@ -89,28 +91,28 @@ public class main_Class extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==b1){
-            new Deposit(pin);
+            new Deposit(cardnum,pin);
             setVisible(false);
         }else if (e.getSource()==b7){
             System.exit(0);
         } else if (e.getSource()==b2) {
-            new Withdrawl(pin);
+            new Withdrawl(cardnum,pin);
             setVisible(false);
         } else if (e.getSource()==b6) {
-            new BalanceEnquriy(pin);
+            new BalanceEnquriy(cardnum,pin);
             setVisible(false);
         } else if (e.getSource()==b3) {
-            new FastCash(pin);
+            new FastCash(cardnum,pin);
             setVisible(false);
         } else if (e.getSource()==b5) {
-            new Pin(pin);
+            new Pin(cardnum,pin);
             setVisible(false);
         } else if (e.getSource()==b4) {
-            new mini(pin);
+            new mini(cardnum,pin);
         }
     }
 
     public static void main(String[] args) {
-        new main_Class("");
+        new main_Class("","");
     }
 }

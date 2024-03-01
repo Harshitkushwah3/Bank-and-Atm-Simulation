@@ -18,8 +18,10 @@ public class FastCash extends JFrame implements ActionListener {
     JButton b6;
     JButton b7;
     String pin;
+    String cardnum;
 
-    FastCash(String pin) {
+    FastCash(String cardnum,String pin) {
+        this.cardnum=cardnum;
         this.pin = pin;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
@@ -93,20 +95,20 @@ public class FastCash extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new FastCash("");
+        new FastCash("","");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b7) {
             setVisible(false);
-            new main_Class(pin);
+            new main_Class(cardnum,pin);
         } else {
             String amount = ((JButton) e.getSource()).getText().substring(4);
             Connn c = new Connn();
             Date date = new Date();
             try {
-                ResultSet resultSet = c.statement.executeQuery("select * from bank where pin = '" + pin + "'");
+                ResultSet resultSet = c.statement.executeQuery("select * from bank where card_num ='" +cardnum+ "' AND pin = '" + pin + "'");
                 int balance = 0;
                 while (resultSet.next()) {
                     if (resultSet.getString("type").equals("Deposit")) {
@@ -121,13 +123,13 @@ public class FastCash extends JFrame implements ActionListener {
                     return;
                 }
 
-                c.statement.executeUpdate("insert into bank values('" + pin + "','" + date + "', 'withdrawl', '" + amount + "')");
+                c.statement.executeUpdate("insert into bank values('" + cardnum + "','" + pin + "','" + date + "', 'withdrawl', '" + amount + "')");
                 JOptionPane.showMessageDialog(null, "Rs. " + amount + " Debited Successfully");
             } catch (Exception E) {
                 E.printStackTrace();
             }
             setVisible(false);
-            new main_Class(pin);
+            new main_Class(cardnum,pin);
 
 
         }

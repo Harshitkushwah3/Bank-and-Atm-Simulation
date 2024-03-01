@@ -18,8 +18,9 @@ public class Login extends JFrame  implements ActionListener {
     JTextField textField2;
     JPasswordField passwordField3;
     JCheckBox showPasswordCheckbox;
+    String hk;
 
-    Login() {
+    Login(String hk) {
         setTitle("BANKING GUI"); // or we can use super function to set the title
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
         Image i2 = i1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
@@ -128,11 +129,11 @@ public class Login extends JFrame  implements ActionListener {
                 Connn c = new Connn();
                 String cardno = textField2.getText();
                 String pin = passwordField3.getText();
-                String q = "select * from login where card_number = '"+cardno+"' and  pin = '"+pin+"'";
+                String q = "select * from login where card_num = '"+cardno+"' and  pin = '"+pin+"'";
                 ResultSet resultSet = c.statement.executeQuery(q);
                 if (resultSet.next()){
                     setVisible(false);
-                    new main_Class(pin);
+                    new main_Class(cardno,pin);
                 }else {
                     JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");
                 }
@@ -153,6 +154,6 @@ public class Login extends JFrame  implements ActionListener {
 
     public static void main(String[] args) {
 
-        new Login();
+        new Login("");
     }
 }

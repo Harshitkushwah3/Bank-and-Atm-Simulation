@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 
 public class mini extends JFrame implements ActionListener {
     String pin;
+    String cardnum;
     JButton button;
-    mini(String pin){
+    mini(String cardnum,String pin){
+        this.cardnum=cardnum;
         this.pin = pin;
         getContentPane().setBackground(new Color(255,204,204));
         setSize(400,600);
@@ -21,7 +23,7 @@ public class mini extends JFrame implements ActionListener {
         label1.setBounds(20,140,400,200);
         add(label1);
 
-        JLabel label2 = new JLabel("TechCoder A.V");
+        JLabel label2 = new JLabel("HK PVT.");
         label2.setFont(new Font("System", Font.BOLD,15));
         label2.setBounds(150,20,200,20);
         add(label2);
@@ -36,9 +38,9 @@ public class mini extends JFrame implements ActionListener {
 
         try{
             Connn c = new Connn();
-            ResultSet resultSet = c.statement.executeQuery("select * from login where pin = '"+pin+"'");
+            ResultSet resultSet = c.statement.executeQuery("select * from login where card_num='" + cardnum + "' AND pin = '"+pin+"'");
             while (resultSet.next()){
-                label3.setText("Card Number:  "+ resultSet.getString("card_number").substring(0,4) + "XXXXXXXX"+ resultSet.getString("card_number").substring(12));
+                label3.setText("Card Number:  "+ resultSet.getString("card_num").substring(0,4) + "XXXXXXXX"+ resultSet.getString("card_num").substring(12));
             }
         }catch (Exception e ){
             e.printStackTrace();
@@ -47,7 +49,7 @@ public class mini extends JFrame implements ActionListener {
         try{
             int balance =0;
             Connn c = new Connn();
-            ResultSet resultSet = c.statement.executeQuery("select * from bank where pin = '"+pin+"'");
+            ResultSet resultSet = c.statement.executeQuery("select * from bank where card_num='" + cardnum + "' AND pin = '"+pin+"'");
             while (resultSet.next()){
 
                 label1.setText(label1.getText() + "<html>"+resultSet.getString("date")+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resultSet.getString("type")+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+resultSet.getString("amount")+ "<br><br><html>");
@@ -79,6 +81,6 @@ public class mini extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new mini("");
+        new mini("","");
     }
 }

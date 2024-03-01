@@ -1,11 +1,9 @@
 package bank.management.sys;
 
-import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.server.ExportException;
 import java.util.Random;
 
 public class Signup3 extends JFrame implements ActionListener {
@@ -226,13 +224,13 @@ public class Signup3 extends JFrame implements ActionListener {
                 if (atype.equals("")){
                     JOptionPane.showMessageDialog(null,"Fill all the fields");
                 }else {
-                    Connn c1 = new Connn();
-                    String q1 = "insert into signupthree values('"+formno+"', '"+atype+"','"+cardno+"','"+pin+"','"+fac+"')";
+                    Connn c2 = new Connn();
+                    String q1 = "insert into signup3 values('"+formno+"', '"+atype+"','"+cardno+"','"+pin+"','"+fac+"')";
                     String q2 = "insert into login values('"+formno+"','"+cardno+"','"+pin+"')";
-                    c1.statement.executeUpdate(q1);
-                    c1.statement.executeUpdate(q2);
+                    c2.statement.executeUpdate(q1);
+                    c2.statement.executeUpdate(q2);
                     JOptionPane.showMessageDialog(null,"Card Number : "+cardno+"\n Pin : "+pin );
-                    new Deposit(pin);
+                    new Deposit(cardno,pin);
                     setVisible(false);
                 }
             } else if (e.getSource()==c) {

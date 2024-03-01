@@ -1,6 +1,5 @@
 package bank.management.sys;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,9 @@ public class Pin extends JFrame implements ActionListener {
     JPasswordField p1;
     JPasswordField p2;
     String pin;
-    Pin(String pin){
+    String cardnum;
+    Pin(String cardnum,String pin){
+        this.cardnum=cardnum;
         this.pin =pin;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
@@ -104,7 +105,7 @@ public class Pin extends JFrame implements ActionListener {
                 Connn c = new Connn();
                 String q1 = "update bank set pin = '"+pin1+"' where pin = '"+pin+"'";
                 String q2 = "update login set pin = '"+pin1+"' where pin = '"+pin+"'";
-                String q3 = "update signupthree set pin = '"+pin1+"' where pin = '"+pin+"'";
+                String q3 = "update signup3 set pin = '"+pin1+"' where pin = '"+pin+"'";
 
                 c.statement.executeUpdate(q1);
                 c.statement.executeUpdate(q2);
@@ -112,10 +113,10 @@ public class Pin extends JFrame implements ActionListener {
 
                 JOptionPane.showMessageDialog(null,"PIN changed successfully");
                 setVisible(false);
-                new main_Class(pin);
+                new Login(pin);
 
             } else if (e.getSource()==b2) {
-                new main_Class(pin);
+                new main_Class(cardnum,pin);
                 setVisible(false);
             }
 
@@ -129,6 +130,6 @@ public class Pin extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Pin("");
+        new Pin("","");
     }
 }

@@ -21,6 +21,7 @@ public class Signup2 extends JFrame implements ActionListener {
     String formno;
     Signup2(String formno){
         super("APPLICATION FORM");
+        this.formno = formno;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
         Image i2 = i1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
@@ -29,7 +30,7 @@ public class Signup2 extends JFrame implements ActionListener {
         image.setBounds(150,5,100,100);
         add(image);
 
-        this.formno = formno;
+
 
         JLabel l1 = new JLabel("Page 2 :-");
         l1.setFont(new Font("Raleway", Font.BOLD,22));
@@ -138,6 +139,9 @@ public class Signup2 extends JFrame implements ActionListener {
         r2.setBackground(new Color(252,208,76));
         r2.setBounds(460,490,100,30);
         add(r2);
+        ButtonGroup seniorCitizenGroup = new ButtonGroup();
+        seniorCitizenGroup.add(r1);
+        seniorCitizenGroup.add(r2);
 
         JLabel l11 = new JLabel("Existing Account : ");
         l11.setFont(new Font("Raleway", Font.BOLD,18));
@@ -154,6 +158,10 @@ public class Signup2 extends JFrame implements ActionListener {
         e2.setBackground(new Color(252,208,76));
         e2.setBounds(460,540,100,30);
         add(e2);
+
+        ButtonGroup existingAccountGroup = new ButtonGroup();
+        existingAccountGroup.add(e1);
+        existingAccountGroup.add(e2);
 
         JLabel l12 = new JLabel("Form No : ");
         l12.setFont(new Font("Raleway", Font.BOLD,14));
@@ -209,9 +217,9 @@ public class Signup2 extends JFrame implements ActionListener {
             if (textPan.getText().equals("") || textAadhar.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Fill all the fields");
             }else {
-                Connn c = new Connn();
-                String q = "insert into Signuptwo values('"+formno+"', '"+rel+"', '"+cate+"','"+inc+"','"+edu+"','"+occ+"','"+pan+"','"+addhar+"','"+scitizen+"','"+eAccount+"')";
-                c.statement.executeUpdate(q);
+                Connn c1 = new Connn();
+                String q = "insert into Signup2 values('"+formno+"', '"+rel+"', '"+cate+"','"+inc+"','"+edu+"','"+occ+"','"+pan+"','"+addhar+"','"+scitizen+"','"+eAccount+"')";
+                c1.statement.executeUpdate(q);
                 new Signup3(formno);
                 setVisible(false);
             }
@@ -225,6 +233,7 @@ public class Signup2 extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+
         new Signup2("");
     }
 }
