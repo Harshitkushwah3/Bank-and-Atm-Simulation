@@ -11,8 +11,8 @@
 <ul>
   <li>Java</li>
   <li>J2EE</li>
-  <li>Apache Tomcat Web Server</li>
-  <li>Oracle</li>
+  <li>MySQL</li>
+  <li>JDBC</li>
 </ul>
 
 <h2>Installation and Usage</h2>
